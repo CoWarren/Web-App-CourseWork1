@@ -13,10 +13,10 @@
         <button v-on:click="">Service Provider</button>
         
     </div>
-    <div class="regForm" v-for="userInput in regUser">
-        <input type="text" placeholder="Username" v-model="userInput.username">
-        <input type="text" placeholder="Password" v-model="userInput.password">
-        <button>Register</button>
+    <div id="regForm">
+        <input placeholder="Username" v-model="username">
+        <input placeholder="Password" v-model="password">
+        <button v-on:click="register">Register</button>
     </div>
 </body>
 <script>
@@ -26,12 +26,25 @@
     // })
 
     var regForm = new Vue ({
-        el: ".regForm",
+        el: "#regForm",
         data: {
-            regUser: [{
-                username: '',
-                password: ''
-            }]
+            username: "",
+            password: "",
+            regUser: [{}],
+        },
+
+        methods: {
+            register: function(){
+                localStorage.setItem("username", JSON.stringify(regForm.username))
+                JSON.parse(localStorage.getItem(regForm.username))
+
+                localStorage.setItem("password", JSON.stringify(regForm.password))
+                JSON.parse(localStorage.getItem(regForm.password))
+
+                regForm.regUser.push({username,password: this.username,password})
+                
+                
+            }
         }
     })
 </script>
