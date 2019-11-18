@@ -8,16 +8,30 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body>
-    <div id="app">
-        {{ message }}
+    <div id="choice">
+        <button v-on:click="">Student/Parent</button>
+        <button v-on:click="">Service Provider</button>
+        
     </div>
-    
+    <div class="regForm" v-for="userInput in regUser">
+        <input type="text" placeholder="Username" v-model="userInput.username">
+        <input type="text" placeholder="Password" v-model="userInput.password">
+        <button>Register</button>
+    </div>
 </body>
 <script>
-    var app = new Vue ({
-        el: "#app",
-        data:{
-            message: "Hello world!"
+    // var choice = new Vue ({
+    //     el: "#choice"
+    //     }
+    // })
+
+    var regForm = new Vue ({
+        el: ".regForm",
+        data: {
+            regUser: [{
+                username: '',
+                password: ''
+            }]
         }
     })
 </script>
