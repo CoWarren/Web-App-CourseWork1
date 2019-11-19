@@ -30,19 +30,24 @@
         data: {
             username: "",
             password: "",
-            regUser: [{}],
+            regUser: [{}]
         },
 
         methods: {
             register: function(){
-                localStorage.setItem("username", JSON.stringify(regForm.username))
+
+                var users = {
+                    username: "",
+                    password: "",
+                }
+
+                localStorage.setItem("user", JSON.stringify(regForm.username))
                 JSON.parse(localStorage.getItem(regForm.username))
 
                 localStorage.setItem("password", JSON.stringify(regForm.password))
                 JSON.parse(localStorage.getItem(regForm.password))
 
                 regForm.regUser.push({username: this.username, password: this.password})
-                
                 
             }
         }
