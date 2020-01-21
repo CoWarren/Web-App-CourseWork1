@@ -22,11 +22,11 @@ grid-row:1;
     width: 100px;
 }
 
-#searchbox {
+#searchbox, #loginBox {
     width: 300px;
 }
 
-#logo, #searchbox {
+#logo, #searchbox, #loginBox {
 height: 50px;
 display: inline-block;
 }

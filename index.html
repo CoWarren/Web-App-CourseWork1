@@ -11,22 +11,23 @@
 <body>
     <div class="container">
         <header>
-            <input id='searchbox' placeholder="search box"></input>
-            <button>Login</button>
-            <button>Registration</button>
+                <!--<input id='searchbox' placeholder="Search box"></input>
+                <button>Search</button>-->
+                <input v-model="username" id='loginBox' placeholder="Username"></input>
+                <input v-model="password" id='loginBox' placeholder="Password"></input>
+
+                <input type="radio" v-model="userType" id="option1" value="Student" name="radio1" checked>Student</input>
+
+                <input type="radio" v-model="userType" id="option2" value="Provdier" name="radio1">Provider</input>
+                
+                <button>Login</button>
+                <button>Registration</button>
         </header>
         <aside>
-            <div class="filter">filter</div>
-            <div class="filter">filter</div>
-            <div class="filter">filter</div>
+            <div class="filter"></div>
         </aside>
         <main>
-            <div class="product">product</div>
-            <div class="product">product</div>
-            <div class="product">product</div>
-            <div class="product">product</div>
-            <div class="product">product</div>
-            <div class="product">product</div>
+            <div class="product"></div>
         </main>
     </div>
         
