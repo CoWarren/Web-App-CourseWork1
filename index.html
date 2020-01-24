@@ -11,17 +11,19 @@
 <body>
     <div class="container">
         <header>
+            <div id="userForm"> 
                 <!--<input id='searchbox' placeholder="Search box"></input>
                 <button>Search</button>-->
-                <input v-model="username" id='loginBox' placeholder="Username"></input>
-                <input v-model="password" id='loginBox' placeholder="Password"></input>
+                <input v-model="email" id='loginBox' placeholder="Email"></input>
+                <input type="password" v-model="password" id='loginBox' placeholder="Password"></input>
 
                 <input type="radio" v-model="userType" id="option1" value="Student" name="radio1" checked>Student</input>
 
                 <input type="radio" v-model="userType" id="option2" value="Provdier" name="radio1">Provider</input>
-                
                 <button>Login</button>
-                <button>Registration</button>
+                <button v-on:click="signup" > Registration</button v-on:click>
+                <p>{{userMessage}} {{currentUser}}</p>
+            </div>    
         </header>
         <aside>
             <div class="filter"></div>
@@ -33,5 +35,32 @@
         
 </body>
 <script>
+
+var userForm = new Vue ({
+    el: "#userForm",
+    data: {
+        email:'',
+        password:'',
+        currentUser: '',
+        userMessage: ''
+    },
+    methods: {
+        signup: function() {
+            this.userMessage = ''
+
+            if(!this.email || !this.password){
+                this.userMessage = 'ERROR: Please enter an Email address and Password.'
+                return
+            }
+
+            if(!this.email.includes("@")){
+                this.userMessage = 'ERROR: Please include an "@" in the Email address.'
+                return
+            }
+
+        }
+    }
+})
+
 </script>
 </html>
