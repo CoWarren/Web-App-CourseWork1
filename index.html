@@ -14,15 +14,19 @@
             <div id="userForm"> 
                 <!--<input id='searchbox' placeholder="Search box"></input>
                 <button>Search</button>-->
-                <input v-model="email" id='loginBox' placeholder="Email"></input>
-                <input type="password" v-model="password" id='loginBox' placeholder="Password"></input>
+                <span v-if='currentUser'>{{currentUser}}</span>
+                <span v-else>
+                    <input v-model="email" id='loginBox' placeholder="Email"></input>
+                    <input type="password" v-model="password" id='loginBox' placeholder="Password"></input>
 
-                <input type="radio" v-model="userType" id="option1" value="Student" name="radio1" checked>Student</input>
+                    <input type="radio" v-model="userType" v-bind:value="'Student'" name="radio1" checked>Student</input>
 
-                <input type="radio" v-model="userType" id="option2" value="Provdier" name="radio1">Provider</input>
-                <button>Login</button>
-                <button v-on:click="signup" > Registration</button v-on:click>
-                <p>{{userMessage}} {{currentUser}}</p>
+                    <input type="radio" v-model="userType"  v-bind:value="'Provdier'" name="radio1">Provider</input>
+
+                    <button>Login</button>
+                    <button v-on:click="signup" > Registration</button v-on:click>
+                    <p>{{userMessage}}</p>
+                <span>
             </div>    
         </header>
         <aside>
@@ -42,21 +46,34 @@ var userForm = new Vue ({
         email:'',
         password:'',
         currentUser: '',
-        userMessage: ''
+        userMessage: '',
+        userType: ''
     },
     methods: {
         signup: function() {
+            var users = []
+            userType = this.userType
+            var email = this.email
+            var password = this.password
             this.userMessage = ''
 
-            if(!this.email || !this.password){
+            if(!email || !password){
                 this.userMessage = 'ERROR: Please enter an Email address and Password.'
                 return
             }
 
-            if(!this.email.includes("@")){
+            if(!email.includes("@")){
                 this.userMessage = 'ERROR: Please include an "@" in the Email address.'
                 return
             }
+
+            if(password.length <= 3){
+                this.userMessage = 'ERROR: Please enter a password of 4 charcters or more'
+                return
+            }
+
+        
+
 
         }
     }
