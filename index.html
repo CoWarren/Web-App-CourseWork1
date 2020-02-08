@@ -22,7 +22,7 @@
                     <input type="radio" v-model="userType" id="option1" value="Student" >Student</input>
 
                     <input type="radio" v-model="userType" id="option2" value="Provdier" >Provider</input>
-                    <button>Login</button>
+                    <button v-on:click="login">Login</button>
                     <button v-on:click="signup"> Registration</button>
                     <p>{{userMessage}}</p>
                 <span>
@@ -100,7 +100,22 @@ var userForm = new Vue ({
             })
         },
         login: function(){
-            
+            var userInfo = []
+
+            console.log("this is working")
+
+            fetch('http://localhost:3000/collections/users').then(
+                function(response){
+                    response.json().then(
+                        function (userData){
+                            userInfo = userData;
+                            
+                            console.log(userInfo);
+
+                        }
+                    )
+                }
+            )
         }
     }
 })

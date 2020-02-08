@@ -29,11 +29,15 @@ app.param('collectionName', (req, res, next, collectionName) => {
 //getting the collection and displaying all its content
 app.get('/collections/:collectionName', (req, res, next) => {
     //projection excludes ID from being shown
-    req.collection.find({}, {projection: {_id: 0}}).toArray((e, results) => {
-        if (e) return next(e)
+    req.collection.find({}, {projection: {_id: 0}}).toArray((err, results) => {
+        if (err) return next(err)
         res.send(results)
     }) 
 })
+
+// app.get('/collection/users', (req, res, next) => {
+//   req.collection.find({})
+// })
 
 
 //Storing user and course info to the mongoDB
