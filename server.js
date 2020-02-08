@@ -35,10 +35,6 @@ app.get('/collections/:collectionName', (req, res, next) => {
     }) 
 })
 
-// app.get('/collection/users', (req, res, next) => {
-//   req.collection.find({})
-// })
-
 
 //Storing user and course info to the mongoDB
 app.post('/collections/:collectionName', (req, res, next) => {
@@ -47,6 +43,8 @@ app.post('/collections/:collectionName', (req, res, next) => {
         res.send(results.ops)
     })
 })
+
+
   
 app.listen(3000, () => {
     console.log('Open at localhost:3000')

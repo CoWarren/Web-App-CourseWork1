@@ -14,7 +14,9 @@
             <div id="userForm"> 
                 <!--<input id='searchbox' placeholder="Search box"></input>
                 <button>Search</button>-->
-                <span v-if='currentUser'>{{currentUser}}</span>
+                <span v-if='currentUser'>
+                    {{currentUser}}
+                </span>
                 <span v-else>
                     <input v-model="email" id='loginBox' placeholder="Email"></input>
                     <input type="password" v-model="password" id='loginBox' placeholder="Password"></input>
@@ -25,7 +27,7 @@
                     <button v-on:click="login">Login</button>
                     <button v-on:click="signup"> Registration</button>
                     <p>{{userMessage}}</p>
-                <span>
+                </span>
             </div>    
         </header>
         <aside>
@@ -96,24 +98,20 @@ var userForm = new Vue ({
             })
             .then((response) => response.json())
             .then((userInfo) =>{
-                this.userMessage = "Successfully registered!! please login"
+                this.userMessage = "Successfully registered!! please login";
             })
         },
         login: function(){
-            var userInfo = []
+            var email = this.email
 
-            console.log("this is working")
-
-            fetch('http://localhost:3000/collections/users').then(
-                function(response){
-                    response.json().then(
-                        function (userData){
-                            userInfo = userData;
-                            
-                            console.log(userInfo);
-
+            fetch('http://localhost:3000/collections/users')
+            .then((response) => response.json())
+            .then((userData) => {
+                    for( var i = 0; i < userData.length; i++){
+                        if(userData[i].email === email){  
+                            this.currentUser = userData[i].email + " " + userData[i].userType
                         }
-                    )
+                    }
                 }
             )
         }
