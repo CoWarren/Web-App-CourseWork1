@@ -72,6 +72,24 @@ var userForm = new Vue ({
                 return
             }
 
+            const data = {
+                email: this.email,
+                password: this.password,
+                type: this.userType
+            };
+            
+            fetch('https://example.com/collections/users', {
+                method: 'POST', // or 'PUT'
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+            console.log('Success:', data);
+})
+
         
 
 
