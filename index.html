@@ -33,6 +33,16 @@
         </aside>
         <main>
             <div id="product">
+                <div>
+                    <input id="searchbox" v-model='searchbox' placeholder="Search box"></input>
+                    <button v-on:click="search">Search</button> 
+                    <div class="product" v-for='course in tempcourses'>
+                        <p>Course:</p>
+                        <li v-for='(value, key) in course'>
+                            {{key}}: {{value}}
+                        </li>
+                    </div>
+                </div>
                 <div class="product" v-for='course in courses'>
                     <p>Course:</p>
                     <li v-for='(value, key) in course'>
@@ -119,7 +129,25 @@ var userForm = new Vue ({
 var product = new Vue ({
     el: "#product",
     data: {
-        courses: []
+        searchbox: '',
+        courses: [],
+        tempcourses: []
+    },
+    methods: {
+        search: function(){
+            var search = this.searchbox
+            
+            fetch('http://localhost:3000/collections/courses')
+            .then((response) => response.json())
+            .then((courseData) => {
+                for(var i = 0; i < courseData.length; i++){
+                    if(courseData[i].provider === search){
+                        var tempCourses = courseData[i]
+                        product.tempcourses.push(tempCourses)
+                    }
+                }
+            })
+        }
     }
 })
 //retrieving all courses 
