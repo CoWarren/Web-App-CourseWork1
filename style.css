@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
 
 .container {
 display: grid;
@@ -7,7 +7,7 @@ gap: 20px;
 font-family: 'Gloria Hallelujah', cursive;
 }
 
-div,header,aside,main {
+div,header,aside, main {
 border: solid lightblue;
 box-sizing: border-box;
 padding: 10px;
@@ -40,4 +40,11 @@ padding: 10px;
 aside {
 grid-column: 1;
 grid-row:2;
+}
+
+.product {
+    width: 265px;
+    height: 255px;
+    margin: 30px;
+    display: inline-block;
 }

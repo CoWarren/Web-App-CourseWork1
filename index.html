@@ -12,8 +12,6 @@
     <div class="container">
         <header>
             <div id="userForm"> 
-                <!--<input id='searchbox' placeholder="Search box"></input>
-                <button>Search</button>-->
                 <span v-if='currentUser'>
                     {{currentUser}}
                 </span>
@@ -34,14 +32,12 @@
             <div class="filter"></div>
         </aside>
         <main>
-            <div id="product" class="product">
-                <!-- <button @click="loadCourse"> loadCourse</button> -->
-                <div v-for='course in courses'>
-                    <ul>
-                        <li v-for='(value, key) in course'>
-                            {{key}}: {{value}}
-                        </li>
-                    </ul>
+            <div id="product">
+                <div class="product" v-for='course in courses'>
+                    <p>Course:</p>
+                    <li v-for='(value, key) in course'>
+                        {{key}}: {{value}}
+                    </li>
                 </div>
             </div>
         </main>
@@ -58,6 +54,7 @@ var userForm = new Vue ({
         userType: '',
         currentUser: '',
         userMessage: '',
+        searchbox: ''
 
     },
     methods: {
@@ -103,13 +100,13 @@ var userForm = new Vue ({
         },
         login: function(){
             var email = this.email
-
+            //retrieve users data by email
             fetch('http://localhost:3000/collections/users')
             .then((response) => response.json())
             .then((userData) => {
                     for( var i = 0; i < userData.length; i++){
                         if(userData[i].email === email){  
-                            this.currentUser = userData[i].email + " " + userData[i].userType
+                            this.currentUser = "Welcome Back!! " + userData[i].userType + " " +  userData[i].email 
                         }
                     }
                 }
@@ -125,7 +122,7 @@ var product = new Vue ({
         courses: []
     }
 })
-
+//retrieving all courses 
 fetch('http://localhost:3000/collections/courses').then(
                 function(response){
                     response.json().then(
