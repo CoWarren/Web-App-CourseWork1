@@ -140,7 +140,7 @@ var userForm = new Vue ({
     }
 })
 
-//creating variable for course section (where the courses are displayed)
+//creating variable for course section (where the courses are displayed created and updated)
 var product = new Vue ({
     el: "#product",
     data: {
@@ -151,7 +151,8 @@ var product = new Vue ({
         topic: '',
         price: '',
         location:'',
-        provider: ''
+        provider: '',
+        userMessage: ''
     },
     methods: {
         search: function(){
@@ -159,7 +160,7 @@ var product = new Vue ({
             this.tempcourses = []
             this.searchResults = ''
 
-
+            //retrieving courses based upon the provider email
             fetch('http://localhost:3000/collections/courses')
             .then((response) => response.json())
             .then((courseData) => {
@@ -174,7 +175,27 @@ var product = new Vue ({
         },
 
         addCourse: function(){
+            const courseInfo = {
+                topic: this.topic,
+                price: this.price,
+                location: this.location,
+                provider: this.provider,
+                ranking: 0
+            }
+            
+            this.userMessage = ''
 
+            fetch('http://localhost:3000/collections/courses', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(courseInfo),
+            })
+            .then((response) => response.json())
+            .then((courseInfo) =>{
+                console.log(this.userMessage = "Successfully added course!")
+            })
         }
     }
 })
