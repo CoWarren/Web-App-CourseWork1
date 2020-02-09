@@ -29,11 +29,13 @@
             </div>    
         </header>
         <aside>
-            <div class="filter"></div>
+            <div class="filter">
+            </div>
         </aside>
         <main>
             <div id="product">
                 <div>
+                    <p>Search for a Course by provider email:</p>
                     <input id="searchbox" v-model='searchbox' placeholder="Search box"></input>
                     <button v-on:click="search">Search</button>
                     <div>
@@ -44,6 +46,14 @@
                             {{key}}: {{value}}
                             </li>
                         </div> 
+                        <div>
+                            <p>Create Course: </p>
+                            <input v-model="topic" id='createCourseBox' placeholder="Topic"></input>
+                            <input v-model="price" id='createCourseBox' placeholder="Price"></input>
+                            <input v-model="location" id='createCourseBox' placeholder="Location"></input>
+                            <input v-model="provider" id='createCourseBox' placeholder="Provider"></input>
+                            <button v-on:click="addCourse">Add Course</button>
+                        </div>
                 </div>
                 <div class="product" v-for='course in courses'>
                     <p>Course:</p>
@@ -112,6 +122,8 @@ var userForm = new Vue ({
         },
         login: function(){
             var email = this.email
+
+            
             //retrieve users data by email
             fetch('http://localhost:3000/collections/users')
             .then((response) => response.json())
@@ -119,6 +131,7 @@ var userForm = new Vue ({
                     for( var i = 0; i < userData.length; i++){
                         if(userData[i].email === email){  
                             this.currentUser = "Welcome Back!! " + userData[i].userType + " " +  userData[i].email 
+                            var auth = userData[i].userType
                         }
                     }
                 }
@@ -134,7 +147,11 @@ var product = new Vue ({
         searchbox: '',
         courses: [],
         tempcourses: [],
-        searchResults: ''
+        searchResults: '',
+        topic: '',
+        price: '',
+        location:'',
+        provider: ''
     },
     methods: {
         search: function(){
@@ -154,6 +171,10 @@ var product = new Vue ({
                     }
                 }
             })
+        },
+
+        addCourse: function(){
+
         }
     }
 })
