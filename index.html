@@ -35,13 +35,15 @@
             <div id="product">
                 <div>
                     <input id="searchbox" v-model='searchbox' placeholder="Search box"></input>
-                    <button v-on:click="search">Search</button> 
-                    <div class="product" v-for='course in tempcourses'>
-                        <p>Course:</p>
-                        <li v-for='(value, key) in course'>
+                    <button v-on:click="search">Search</button>
+                    <div>
+                        <p>{{searchResults}}</p>
+                        <div class="searchProduct" v-for='course in tempcourses'>
+                            <p>Course:</p>
+                            <li v-for='(value, key) in course'>
                             {{key}}: {{value}}
-                        </li>
-                    </div>
+                            </li>
+                        </div> 
                 </div>
                 <div class="product" v-for='course in courses'>
                     <p>Course:</p>
@@ -131,12 +133,16 @@ var product = new Vue ({
     data: {
         searchbox: '',
         courses: [],
-        tempcourses: []
+        tempcourses: [],
+        searchResults: ''
     },
     methods: {
         search: function(){
             var search = this.searchbox
-            
+            this.tempcourses = []
+            this.searchResults = ''
+
+
             fetch('http://localhost:3000/collections/courses')
             .then((response) => response.json())
             .then((courseData) => {
@@ -144,6 +150,7 @@ var product = new Vue ({
                     if(courseData[i].provider === search){
                         var tempCourses = courseData[i]
                         product.tempcourses.push(tempCourses)
+                        this.searchResults = 'Search results found:'
                     }
                 }
             })
